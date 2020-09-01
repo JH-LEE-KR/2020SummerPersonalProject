@@ -51,7 +51,7 @@ The article text, similar articles, and a list of words that appear in the text 
 **Input word**<br>
 <img src="image/input word.jpg" width="60%"><br><br>
 **Result of the input word**<br>
-<img src="image/word.jpg" width="60%"><br><br>
+<img src="image/word.jpg" width="60%"><br>
 The title of the article in which the entered word appears the most is displayed.<br><br>
 6. If you want to exit the program. Input 'exit'<br><br>
 <img src="image/exit.jpg" width="60%"><br><br>
