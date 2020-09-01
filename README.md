@@ -34,7 +34,8 @@ pip install scikit-learn
 Install scikit-learn for convert the document to a vectorized matrix and compute it
 ## How to use
 1. Run crawling.py and get the data. The data is saved in output.txt.<br>
-2. Run make_matrix_voca.py to get a vectorized document matrix and wordbook. The vectorized matrix is stored in matrix.txt and the wordbook is stored in voca.txt.<br>
+2. Run make_matrix_voca.py to get a vectorized document matrix and wordbook.<br> 
+The vectorized matrix is stored in matrix.txt and the wordbook is stored in voca.txt.<br>
 3. Run main.py<br><br>
 <img src="image/main.jpg" width="60%"><br>
 The title of the article is displayed.<br><br>
