@@ -44,14 +44,14 @@ The title of the article is displayed.<br><br>
 Prints a list of the titles of the next or previous page.<br><br>
 5. Input article title or word<br><br>
 **Input article title**<br>
-<img src="image/input title.jpg" width="60%"><br>
+<img src="image/input title.jpg" width="60%"><br><br>
 **Result of the input article title**<br>
 <img src="image/article.jpg" width="70%"><br>
 The article text, similar articles, and a list of words that appear in the text are displayed.<br><br>
 **Input word**<br>
-<img src="image/input word.jpg" width="60%"><br>
+<img src="image/input word.jpg" width="60%"><br><br>
 **Result of the input word**<br>
-<img src="image/word.jpg" width="60%"><br>
+<img src="image/word.jpg" width="60%"><br><br>
 The title of the article in which the entered word appears the most is displayed.<br><br>
 6. If you want to exit the program. Input 'exit'<br><br>
 <img src="image/exit.jpg" width="60%"><br><br>
