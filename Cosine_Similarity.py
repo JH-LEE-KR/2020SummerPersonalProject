@@ -1,28 +1,22 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
-from split import splitArticles
+import numpy as np
 
-
-list_title = splitArticles('title', '\n') # Get title that '\n' has been removed to compare similarity
-list_contents = splitArticles('contents', '\n') # Get contents that '\n' has been removed to compare similarity
-
-
-tfidf = TfidfVectorizer()
-tfidf_matrix = tfidf.fit_transform(list_contents) # Vectorize the frequency of each word in contents and Return normalized TF-IDF matrix
-
-
-# Since it was normalized using fit_transform(), the cosine similarity can be obtained by dot product of TF-IDF matrix
-cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix) # linear_kernel -> Calculate dot product of vectors
-
-# function of providing a list of articles with a high similarity with a particular article
-def get_similar(title, cosine_sim = cosine_sim):
-    index = list_title.index(title) # Get the index of a particular article
-    sim_scores = list(enumerate(cosine_sim[index])) # enumerate -> To create sequence pairs between article content and words
-    sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse=True) # Similarities are expressed in sim_scores[1] -> key = lambda x: x[1], reverse=True -> descending order
-    sim_scores = sim_scores[1:6] # In order to use only the top 5 articles with similarity.
-    indices = [i[0] for i in sim_scores] # Index is expressed in sim_scores[0] -> i[0] for i in sim_scores
-    sim_title = [] # To make a list of the titles of articles
+def get_similar(title, list_title,list_contents):
+    tfidf = TfidfVectorizer()
+    tfidf_matrix = tfidf.fit_transform(list_contents).toarray()
+    transpose_tfidf_matrix = np.transpose(tfidf_matrix)
+    cosine_sim = np.dot(tfidf_matrix, transpose_tfidf_matrix) # TF-IDF 행렬과 그것의 전치행렬의 내적(dot product) -> 각 성분 = COSINE 유사도 점수
+    index = list_title.index(title) 
+    scores = []
+    for i in range(len(cosine_sim[index])): 
+        temp = [i, cosine_sim[index][i]] # [index]-> 행, 각 기사 [i] -> 열, 각 기사간 유사도 점수. 전치행렬과의 내적을 통해 얻어진 정사각행렬이기 때문에 행, 열 어느것을 사용하든 상관은 없다.
+        scores.append(temp)
+    scores = sorted(scores, key = lambda x: x[1], reverse=True) # 인덱스 순이 아닌 유사도 점수 순서로 정렬
+    indices = []
+    for i in range(len(scores)):
+        indices.append(scores[i][0]) 
+    indices = indices[1:6] # index 0은 자기 자신에 대한 값 즉, 유사도의 의미가 없음 -> index 1부터 시작한다.
+    sim_title = []
     for i in indices:
         sim_title.append(list_title[i])
-    return sim_title # Return list of titles for 5 articles with high similarity
-
+    return sim_title
